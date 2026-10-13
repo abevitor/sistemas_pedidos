@@ -34,7 +34,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Order> buscar(@PathVariable Long id) {
+    public ResponseEntity<Order> buscar(@PathVariable("id") Long id) {
         return repository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
