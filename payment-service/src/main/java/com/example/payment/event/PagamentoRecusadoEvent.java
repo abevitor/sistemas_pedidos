@@ -1,5 +1,3 @@
 package com.example.payment.event;
 
-public class PagamentoRecusadoEvent {
-    
-}
+public record PagamentoRecusadoEvent(Long pedidoId, String motivo) {}
