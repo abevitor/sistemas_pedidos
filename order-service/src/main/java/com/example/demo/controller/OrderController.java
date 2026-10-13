@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.http.ResponseEntity;
 
 import com.example.demo.Repository.OrderRepository;
 import com.example.demo.dto.CreateOrderRequest;
@@ -29,4 +32,12 @@ public class OrderController {
             new PedidoCriadoEvent(order.getId(), order.getClienteId(), order.getValorTotal()));
         return order;
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Order> buscar(@PathVariable Long id) {
+        return repository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }
