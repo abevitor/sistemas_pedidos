@@ -1,5 +1,5 @@
 package com.example.demo.dto;
 
-public class CreateOrderRequest {
-    
-}
+import java.math.BigDecimal;
+
+public record CreateOrderRequest(String clientId, BigDecimal valorTotal) {}
