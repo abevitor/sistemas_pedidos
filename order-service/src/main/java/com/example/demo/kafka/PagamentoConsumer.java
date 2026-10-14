@@ -8,6 +8,7 @@ import com.example.demo.event.PagamentoAprovadoEvent;
 import com.example.demo.event.PagamentoRecusadoEvent;
 import com.example.demo.model.Order;
 import com.example.demo.model.OrderStatus;
+import com.example.demo.event.EstoqueInsuficienteEvent;
 
 import jakarta.transaction.Transactional;
 
@@ -41,6 +42,17 @@ public class PagamentoConsumer {
         System.out.println("Pagamento recusado recebido: " + event);
         atualizarStatus(event.pedidoId(), OrderStatus.CANCELADO);
     } 
+
+    @KafkaListener(
+        topics = "estoque-insuficiente",
+        groupId = "order-service",
+        properties = "spring.json.value.default.type=com.example.demo.event.EstoqueInsuficienteEvent"
+    )
+    @Transactional 
+    public void aoFaltarEstoque(EstoqueInsuficienteEvent event) {
+        System.out.println("Estoque insuficiente recebido: " + event);
+        atualizarStatus(event.pedidoId(), OrderStatus.CANCELADO);
+    }
 
     private void atualizarStatus(Long pedidoId, OrderStatus novoStatus) {
         Order order = repository.findById(pedidoId).orElse(null);
