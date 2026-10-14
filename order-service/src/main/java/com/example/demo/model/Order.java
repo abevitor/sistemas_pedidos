@@ -12,18 +12,23 @@ public class Order {
     private Long id;
 
     private String clienteId;
+    private Long produtoId;
+    private Integer quantidade;
     private BigDecimal valorTotal;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
     protected Order() {
     }
 
-    public Order(String clienteId, BigDecimal valorTotal) {
+    public Order(String clienteId, BigDecimal valorTotal, Long produtoId, Integer quantidade) {
         this.clienteId = clienteId;
+        this.produtoId = produtoId;
+        this.quantidade = quantidade;
         this.valorTotal = valorTotal;
         this.status = OrderStatus.PENDENTE;
+
     }
 
     public Long getId() {
@@ -32,6 +37,14 @@ public class Order {
 
     public String getClienteId() {
         return clienteId;
+    }
+
+    public Long getProdutoId() {
+        return produtoId;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
     }
 
     public BigDecimal getValorTotal() {
