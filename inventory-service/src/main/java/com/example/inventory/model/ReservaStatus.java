@@ -1,5 +1,6 @@
 package com.example.inventory.model;
 
-public class ReservaStatus {
+public enum ReservaStatus {
+    RESERVADA, LIBERADA
     
 }
