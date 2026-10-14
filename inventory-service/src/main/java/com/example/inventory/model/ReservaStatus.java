@@ -1,4 +1,4 @@
-package main.java.com.example.inventory.model;
+package com.example.inventory.model;
 
 public class ReservaStatus {
     

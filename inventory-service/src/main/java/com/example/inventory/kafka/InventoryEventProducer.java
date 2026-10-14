@@ -1,4 +1,4 @@
-package main.java.com.example.inventory.kafka;
+package com.example.inventory.kafka;
 
 public class InventoryEventProducer {
     

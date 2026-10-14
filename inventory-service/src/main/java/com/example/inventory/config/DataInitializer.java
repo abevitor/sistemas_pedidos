@@ -1,4 +1,4 @@
-package main.java.com.example.inventory.config;
+package com.example.inventory.config;
 
 public class DataInitializer {
     
