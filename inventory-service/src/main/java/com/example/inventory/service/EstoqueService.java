@@ -12,8 +12,7 @@ import com.example.inventory.repository.ReservaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-@Service 
+@Service
 public class EstoqueService {
 
     private final ProdutoRepository produtoRepository;
@@ -21,8 +20,8 @@ public class EstoqueService {
     private final InventoryEventProducer producer;
 
     public EstoqueService(ProdutoRepository produtoRepository,
-                          ReservaRepository reservaRepository,
-                          InventoryEventProducer producer) {
+            ReservaRepository reservaRepository,
+            InventoryEventProducer producer) {
         this.produtoRepository = produtoRepository;
         this.reservaRepository = reservaRepository;
         this.producer = producer;
@@ -41,7 +40,45 @@ public class EstoqueService {
         }
 
         Produto produto = produtoRepository.buscarComLock(event.produtoId()).orElse(null);
+
+    if(produto == null) {
+        producer.publicarInsuficiente(
+            new EstoqueInsuficienteEvent(event.pedidoId(), "Produto não encontrado"));
+            System.out.println("Pedido " + event.pedidoId() + ": produto não encontrado");
+            return;
     }
-    
-    
+
+    if (produto.getQuantidadeDisponivel() < event.quantidade()) {
+            producer.publicarInsuficiente(
+                new EstoqueInsuficienteEvent(event.pedidoId(), "Estoque insuficiente"));
+            System.out.println("Pedido " + event.pedidoId() + ": estoque insuficiente");
+            return;
+        }
+
+        produto.setQuantidadeDisponivel((produto.getQuantidadeDisponivel() - event.quantidade()));
+        produtoRepository.save(produto);
+        reservaRepository.save(new Reserva(event.pedidoId(), event.produtoId(), event.quantidade()));
+
+        producer.publicarReservado(
+            new EstoqueReservadoEvent(event.pedidoId(), event.clientId(), event.valorTotal()));
+            System.out.println("Estoque RESERVADO para o pedido " + event.pedidoId());
+    }
+
+    @Transactional
+    public void liberar(Long pedidoId) {
+        Reserva reserva = reservaRepository.findByPedidoId(pedidoId).orElse(null);
+
+        if (reserva == null || reserva.getStatus() != ReservaStatus.RESERVADA) {
+            System.out.println("Pedido " + pedidoId + ": nada para liberar.");
+            return;
+        }
+
+        Produto produto = produtoRepository.buscarComLock(reserva.getProdutoId()).orElseThrow();
+        produto.setQuantidadeDisponivel(produto.getQuantidadeDisponivel() + reserva.getQuantidade());
+        produtoRepository.save(produto);
+
+        reserva.setStatus(ReservaStatus.LIBERADA);
+        reservaRepository.save(reserva);
+        System.out.println("Estoque DEVOLVIDO do pedido " + pedidoId);
+    }
 }
