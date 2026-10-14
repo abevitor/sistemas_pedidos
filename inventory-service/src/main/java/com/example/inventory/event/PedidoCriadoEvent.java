@@ -1,5 +1,5 @@
 package com.example.inventory.event;
 
-public class PedidoCriadoEvent {
-    
-}
+import java.math.BigDecimal;
+
+public record PedidoCriadoEvent(Long pedidoId, String clientId, Long produtoId, Integer quantidade, BigDecimal valorTotal) {}

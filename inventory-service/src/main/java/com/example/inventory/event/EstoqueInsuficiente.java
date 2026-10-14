@@ -1,5 +1,3 @@
 package com.example.inventory.event;
 
-public class EstoqueInsuficiente {
-    
-}
+public record EstoqueInsuficiente(Long pedidoId, String motivo) {}

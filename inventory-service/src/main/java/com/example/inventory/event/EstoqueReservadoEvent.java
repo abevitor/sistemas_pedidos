@@ -1,5 +1,5 @@
 package com.example.inventory.event;
 
-public class EstoqueReservadoEvent {
-    
-}
+import java.math.BigDecimal;
+
+public record EstoqueReservadoEvent(Long pedidoId, String clienteId, BigDecimal valorTotal) {}
