@@ -27,9 +27,13 @@ public class OrderController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Order criar(@RequestBody CreateOrderRequest request) {
-        Order order = repository.save(new Order(request.clienteId(), request.valorTotal()));
-        producer.publicarPedidoCriado(
-            new PedidoCriadoEvent(order.getId(), order.getClienteId(), order.getValorTotal()));
+        Order order = repository.save(new Order(
+            request.clienteId(), request.produtoId(), request.quantidade(), request.valorTotal()));
+
+        producer.publicarPedidoCriado(new PedidoCriadoEvent(
+            order.getId(), order.getClienteId(), order.getProdutoId(),
+            order.getQuantidade(), order.getValorTotal()));
+
         return order;
     }
 

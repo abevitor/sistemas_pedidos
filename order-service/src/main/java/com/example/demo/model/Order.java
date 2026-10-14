@@ -22,13 +22,12 @@ public class Order {
     protected Order() {
     }
 
-    public Order(String clienteId, BigDecimal valorTotal, Long produtoId, Integer quantidade) {
+    public Order(String clienteId, Long produtoId, Integer quantidade, BigDecimal valorTotal) {
         this.clienteId = clienteId;
         this.produtoId = produtoId;
         this.quantidade = quantidade;
         this.valorTotal = valorTotal;
         this.status = OrderStatus.PENDENTE;
-
     }
 
     public Long getId() {
@@ -58,5 +57,4 @@ public class Order {
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
-
 }
