@@ -1,5 +1,26 @@
 package com.example.inventory.config;
 
-public class DataInitializer {
-    
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import com.example.inventory.model.Produto;
+import com.example.inventory.repository.ProdutoRepository;
+
+@Component
+public class DataInitializer implements CommandLineRunner {
+
+    private final ProdutoRepository repository;
+
+    public DataInitializer(ProdutoRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public void run(String... args) {
+        if (repository.count() == 0) {
+            repository.save(new Produto("Notebook", 10)); // id 1
+            repository.save(new Produto("Mouse", 50)); // id 2
+            repository.save(new Produto("Teclado", 5)); // id 3
+        }
+    }
 }
