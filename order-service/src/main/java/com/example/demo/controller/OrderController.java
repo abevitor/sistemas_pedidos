@@ -4,13 +4,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.http.ResponseEntity;
 
-import com.example.demo.Repository.OrderRepository;
 import com.example.demo.dto.CreateOrderRequest;
 import com.example.demo.event.PedidoCriadoEvent;
 import com.example.demo.kafka.OrderEventProducer;
 import com.example.demo.model.Order;
+import com.example.demo.repository.OrderRepository;
 
 @RestController
 @RequestMapping("/orders")
