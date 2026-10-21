@@ -13,8 +13,14 @@ public class KafkaTopicConfig {
         return TopicBuilder.name("pagamento-aprovado").partitions(3).replicas(1).build();
     }
 
-    @Bean NewTopic pagamentoRecusadoTopic() {
+    @Bean
+    NewTopic pagamentoRecusadoTopic() {
         return TopicBuilder.name("pagamento-recusado").partitions(3).replicas(1).build();
+    }
+
+    @Bean 
+    public NewTopic estoqueReservadoDltTopic() {
+        return TopicBuilder.name("estoque-reservado.DLT").partitions(3).replicas(1).build();
     }
     
 }
