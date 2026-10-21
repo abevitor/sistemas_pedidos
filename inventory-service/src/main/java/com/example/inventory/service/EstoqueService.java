@@ -60,7 +60,7 @@ public class EstoqueService {
         reservaRepository.save(new Reserva(event.pedidoId(), event.produtoId(), event.quantidade()));
 
         producer.publicarReservado(
-            new EstoqueReservadoEvent(event.pedidoId(), event.clientId(), event.valorTotal()));
+            new EstoqueReservadoEvent(event.pedidoId(), event.clienteId(), event.valorTotal()));
             System.out.println("Estoque RESERVADO para o pedido " + event.pedidoId());
     }
 

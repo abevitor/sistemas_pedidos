@@ -10,12 +10,12 @@ public class KafkaTopicConfig {
 
     @Bean 
     public NewTopic estoqueReservadoTopic(){
-        return TopicBuilder.name("estoque-resevado").partitions(3).replicas(1).build();
+        return TopicBuilder.name("estoque-reservado").partitions(3).replicas(1).build();
     }
     
     @Bean 
     public NewTopic estoqueInsuficienteTopic() {
-        return TopicBuilder.name("esotque-reservado").partitions(3).replicas(1).build();
+        return TopicBuilder.name("estoque-insuficiente").partitions(3).replicas(1).build();
     }
     
 }

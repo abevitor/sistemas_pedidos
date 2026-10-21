@@ -18,7 +18,7 @@ public class PedidoCriadoConsumer {
         this.producer = producer;
     }
 
-    @KafkaListener(topics = "pedido-reservado",
+    @KafkaListener(topics = "estoque-reservado",
                    groupId = "payment-service")
     public void consumir(PedidoCriadoEvent event) {
         System.out.println("Pedido recebido: " + event);
