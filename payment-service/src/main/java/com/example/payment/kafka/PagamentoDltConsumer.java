@@ -17,7 +17,7 @@ public class PagamentoDltConsumer {
 
     @KafkaListener(topics = "estoque-reservado.DLT", groupId = "payment-service-dlt")
     public void aoFalharDeVez(PedidoCriadoEvent event) {
-        System.out.println("DLT: pagamento do pedido " + event.pedidoId() + "falhou de vez, recusando para compensar");
+        System.out.println("DLT: pagamento do pedido " + event.pedidoId() + " falhou de vez, recusando para compensar");
         producer.publicarRecusado( new PagamentoRecusadoEvent(event.pedidoId(), "Falha ao processar o pagamento"));
     }
     
