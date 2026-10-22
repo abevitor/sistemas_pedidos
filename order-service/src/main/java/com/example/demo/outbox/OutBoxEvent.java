@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "outbox_events")
-public class OutBoxEvent {
+public class OutboxEvent {
 
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +20,9 @@ public class OutBoxEvent {
     private boolean publicado;
     private LocalDateTime criadoEm;
 
-    protected OutBoxEvent() {}
+    protected OutboxEvent() {}
 
-    public OutBoxEvent(String topic, String chave, String payload) {
+    public OutboxEvent(String topic, String chave, String payload) {
         this.topic = topic;
         this.chave = chave;
         this.payload = payload;
