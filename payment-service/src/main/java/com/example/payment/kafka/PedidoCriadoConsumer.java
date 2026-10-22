@@ -23,10 +23,6 @@ public class PedidoCriadoConsumer {
     public void consumir(PedidoCriadoEvent event) {
         System.out.println("Pedido recebido: " + event);
 
-        if (event.valorTotal().compareTo(new BigDecimal("666")) == 0) {
-            throw new IllegalStateException("Falha simulada no gateway de pagamento");
-        }
-
         boolean aprovado = ThreadLocalRandom.current().nextInt(100) < 70;
 
         if (aprovado) {
