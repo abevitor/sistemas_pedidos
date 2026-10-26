@@ -41,7 +41,7 @@ public class OutboxPublisher {
 
     @Scheduled(fixedDelay = 1000)
     public void publicarPendentes() {
-        List<OutboxEvent> pendentes = repository.findtTop50ByPublicadoFalseOrderByIdAsc();
+        List<OutboxEvent> pendentes = repository.findTop50ByPublicadoFalseOrderByIdAsc();
 
         for (OutboxEvent evento : pendentes) {
             try {

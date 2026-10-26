@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface OutboxEventRepository extends JpaRepository<OutboxEvent, Long> {
 
-    List<OutboxEvent> findtTop50ByPublicadoFalseOrderByIdAsc();
+    List<OutboxEvent> findTop50ByPublicadoFalseOrderByIdAsc();
     
 }
