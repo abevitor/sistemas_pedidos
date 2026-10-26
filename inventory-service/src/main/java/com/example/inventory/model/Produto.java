@@ -1,5 +1,7 @@
 package com.example.inventory.model;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +13,7 @@ public class Produto {
     private Long id;
 
     private String nome;
+    private BigDecimal preco;
     private int quantidadeDisponivel;
 
     protected Produto() {
@@ -18,6 +21,7 @@ public class Produto {
 
     public Produto(String nome, int quantidadeDisponivel) {
         this.nome = nome;
+        this.preco = preco;
         this.quantidadeDisponivel = quantidadeDisponivel;
     }
 
@@ -28,6 +32,9 @@ public class Produto {
     public String getNome() {
         return nome;
     }
+
+    public BigDecimal getPreco() { 
+        return preco; }
 
     public int getQuantidadeDisponivel() {
         return quantidadeDisponivel;
