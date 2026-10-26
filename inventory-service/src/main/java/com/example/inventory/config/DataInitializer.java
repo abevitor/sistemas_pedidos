@@ -1,5 +1,7 @@
 package com.example.inventory.config;
 
+import java.math.BigDecimal;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -18,9 +20,9 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         if (repository.count() == 0) {
-            repository.save(new Produto("Notebook", 10)); // id 1
-            repository.save(new Produto("Mouse", 50)); // id 2
-            repository.save(new Produto("Teclado", 5)); // id 3
+            repository.save(new Produto("Notebook", new BigDecimal("2500.00"), 10));  // id 1
+            repository.save(new Produto("Mouse", new BigDecimal("80.00"), 50));       // id 2
+            repository.save(new Produto("Teclado", new BigDecimal("200.00"), 5));     // id 3
         }
     }
 }

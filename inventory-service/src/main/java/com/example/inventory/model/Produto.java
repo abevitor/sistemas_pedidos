@@ -19,7 +19,7 @@ public class Produto {
     protected Produto() {
     }
 
-    public Produto(String nome, int quantidadeDisponivel) {
+    public Produto(String nome, BigDecimal preco, int quantidadeDisponivel) {
         this.nome = nome;
         this.preco = preco;
         this.quantidadeDisponivel = quantidadeDisponivel;
@@ -32,9 +32,8 @@ public class Produto {
     public String getNome() {
         return nome;
     }
-
-    public BigDecimal getPreco() { 
-        return preco; }
+    
+    public BigDecimal getPreco() { return preco; }
 
     public int getQuantidadeDisponivel() {
         return quantidadeDisponivel;
