@@ -45,7 +45,18 @@ services:
       MYSQL_DATABASE: inventory_db
     volumes:
       - mysql_inventory_data:/var/lib/mysql
+  
+  mysql-auth:
+    image: mysql:8.4
+    ports:
+     - "3309-3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: auth_db
+    volumes:
+     - mysql_auth_data:/var/lib/mysql
 
 volumes:
   mysql_order_data:
   mysql_inventory_data:
+  mysql_auth_data:
