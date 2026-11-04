@@ -33,8 +33,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // catálogo de produtos fica público: não é dado sensível,
                 // e o order-service também precisa consultar sem se autenticar como usuário
-                .requestMatchers("GET", "/produtos/**").permitAll()
-                .anyRequest().authenticated())
+                .anyRequest().permitAll())
             .oauth2ResourceServer(oauth -> oauth.jwt(Customizer.withDefaults()));
         return http.build();
     }
