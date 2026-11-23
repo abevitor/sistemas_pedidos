@@ -10,7 +10,7 @@ export async function registrar(nome, email, senha) {
     return resp.json();
 }
 
-expot async function login(email, senha) {
+export async function login(email, senha) {
     const resp = await fetch(`${AUTH_URL}/auth/login`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
